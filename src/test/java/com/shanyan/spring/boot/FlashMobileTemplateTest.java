@@ -3,8 +3,6 @@ package com.shanyan.spring.boot;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,15 +10,17 @@ import com.shanyan.spring.boot.dto.FlashLoginResponse;
 import com.shanyan.spring.boot.dto.FlashValidateResponse;
 
 import okhttp3.OkHttpClient;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class FlashMobileTemplateTest {
 
-	ObjectMapper objectMapper = new ObjectMapper();
+	static ObjectMapper objectMapper = new ObjectMapper();
 	OkHttpClient okhttp3Client = new OkHttpClient.Builder().build();
 	FlashMobileProperties properties = new FlashMobileProperties();
 	
-	@Before
-	public void setup() {
+	@BeforeAll
+	public static void setup() {
 		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 		List<FlashMobileApp> apps = new ArrayList<>();
 		FlashMobileApp app = new FlashMobileApp();
