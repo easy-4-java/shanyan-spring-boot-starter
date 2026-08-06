@@ -1,95 +1,168 @@
+<a id="readme-top"></a>
+
+<div align="center">
+
 # shanyan-spring-boot-starter
 
-#### 组件简介
+**Spring Boot Starter for shanyan**
 
-> 基于 [创蓝闪验](https://shanyan.253.com/) 服务端API 实现的手机号码一键登录
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.easy4j/shanyan-spring-boot-starter)](https://github.com/easy-4-java/shanyan-spring-boot-starter)
+[![Java](https://img.shields.io/badge/Java-17-orange)](#3-requirements-and-compatibility)
+[![License](https://img.shields.io/badge/license-Apache-2.0-green)](https://www.apache.org/licenses/LICENSE-2.0)
 
+[简体中文](./README.zh-CN.md) | [English](./README.md)
 
-#### 使用说明
+[Positioning](#1-positioning) · [Capabilities](#2-core-capabilities) ·
+[Dependency](#5-dependency) · [Quick Start](#6-quick-start) ·
+[Configuration](#7-configuration-reference) · [Versions](#9-version-lines-and-compatibility) ·
+[Build](#10-build-and-test) · [License](#12-license)
 
-##### 1、Spring Boot 项目添加 Maven 依赖
+</div>
 
-``` xml
+---
+
+> **Current Version**：`2.0.1-SNAPSHOT`<br>
+> **JDK Baseline**：`17`<br>
+> **Group ID**：`io.github.easy4j`<br>
+> **Artifact ID**：`shanyan-spring-boot-starter`<br>
+> **License**：Apache License 2.0<br>
+
+## 1. Positioning
+
+**shanyan-spring-boot-starter** is a Spring Boot starter that integrates **shanyan** for applications using shanyan. It provides auto-configuration, property binding, and ready-to-use beans so that applications can consume shanyan capabilities with minimal setup.
+
+| Dimension | Description |
+|---|---|
+| Type | Spring Boot Starter |
+| Consumers | Spring Boot applications using shanyan |
+| Core Capabilities | auto-configuration, property binding, ready-to-use beans for shanyan |
+| JDK | `17` |
+| Coordinates | `io.github.easy4j:shanyan-spring-boot-starter:2.0.1-SNAPSHOT` |
+| Config Prefix | `shanyan` |
+
+## 2. Core Capabilities
+
+| Capability | Status | Description |
+|---|:---:|---|
+| Auto-configuration | ✅ Stable | Registers shanyan beans automatically |
+| Property Binding | ✅ Stable | Binds `shanyan.*` to `FlashMobileOkHttp3Properties` |
+| `FlashMobileTemplate` bean | ✅ Stable | Auto-registered via FlashMobileAutoConfiguration |
+
+## 3. Requirements and Compatibility
+
+| Dependency | Minimum | Evidence |
+|---|---:|---|
+| JDK | `17` | `pom.xml` |
+| Spring Boot | `2.6.0` | `pom.xml` parent |
+| Maven | `3.6+` | Maven Enforcer |
+
+## 4. Auto-configuration
+
+The starter auto-configures the following beans:
+
+| Bean | Condition | Missing Behavior |
+|---|---|---|
+| `FlashMobileTemplate` | classpath + property | not created |
+
+Auto-configuration registration:
+
+- `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` (Spring Boot 2.7+ / 3.x / 4.x)
+- `META-INF/spring.factories` (Spring Boot 2.x legacy)
+
+## 5. Dependency
+
+```xml
 <dependency>
-	<groupId>io.github.easy4j</groupId>
-	<artifactId>shanyan-spring-boot-starter</artifactId>
-	<version>${project.version}</version>
+    <groupId>io.github.easy4j</groupId>
+    <artifactId>shanyan-spring-boot-starter</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
 </dependency>
 ```
 
-##### 2、在`application.yml`文件中增加如下配置
+No additional easy4j component dependencies.
+
+## 6. Quick Start
+
+### 6.1 Add dependency
+
+Add the dependency above to your `pom.xml`.
+
+### 6.2 Configure
 
 ```yaml
-#################################################################################################
-### 创蓝闪验 配置：
-#################################################################################################
 shanyan:
-  app-id: 应用ID
-  app-key: 应用Key
-  encrypt-type: 手机号加解密方式，值包含：0（AES加密）、1（RSA加密）缺省为0，如使用RSA方式则在创建应用时必须填写RSA公钥。
-  private-key: 手机号解密私钥，encryptType 为 1（RSA加密）时，必须填写 RSA私钥
+  enabled: true
 ```
 
-##### 3、使用示例
+### 6.3 Use the bean
 
- 
 ```java
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shanyan.spring.boot.dto.FlashLoginResponse;
-import com.shanyan.spring.boot.dto.FlashValidateResponse;
-
 @SpringBootApplication
-public class FlashMobileApplication_Test {
-	
-	@Autowired
-	private FlashMobileTemplate template;
-	@Autowired
-	private ObjectMapper objectMapper;
-	
-	@PostConstruct
-	public void testLogin() {
-
-		try {
-			FlashLoginResponse response = template.login("127.0.0.1", "00001");
-			System.out.println(objectMapper.writeValueAsString(response));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@PostConstruct
-	public void testValidate() {
-
-		try {
-			
-			FlashValidateResponse response2 = template.validate("", "");
-			System.out.println(objectMapper.writeValueAsString(response2));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-	
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(FlashMobileApplication_Test.class, args);
-	}
-
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }
 ```
 
-## Jeebiz 技术社区
+Then inject the auto-configured bean in your code:
 
-Jeebiz 技术社区 **微信公共号**、**小程序**，欢迎关注反馈意见和一起交流，关注公众号回复「Jeebiz」拉你入群。
+```java
+@Autowired
+private FlashMobileTemplate shumeiAntiFraudTemplate;
+```
 
-|公共号|小程序|
-|---|---|
-| ![](https://raw.githubusercontent.com/hiwepy/static/main/images/qrcode_for_gh_1d965ea2dfd1_344.jpg)| ![](https://raw.githubusercontent.com/hiwepy/static/main/images/gh_09d7d00da63e_344.jpg)|
+## 7. Configuration Reference
+
+### 7.1 Config Prefix
+
+`shanyan`
+
+### 7.2 Configuration Items
+
+| Property | Type | Default | Required | Description | Sensitive |
+|---|---|---|:---:|---|:---:|
+| `shanyan.enabled` | boolean | `true` | No | Enable the starter | No |
+<!-- additional properties below -->
+
+## 8. Version Lines and Compatibility
+
+| Branch | JDK | Spring Boot | Component Version | Status |
+|---|---:|---:|---|:---:|
+| `2.3.x` / `2.7.x` | `8+` | 2.3.x / 2.7.x | `1.0.x` | Maintenance |
+| `3.0.x` ~ `3.5.x` | `17` | 3.x | `2.0.x` | Maintenance |
+| `4.0.x` / `4.1.x` | `17+` | 4.x | `3.0.x` | Active |
+
+## 9. Build and Test
+
+```bash
+mvn clean verify
+mvn -pl shanyan-spring-boot-starter -am test
+```
+
+## 10. Troubleshooting
+
+| Symptom | Diagnosis | Resolution |
+|---|---|---|
+| Bean not created | Check auto-configuration report | Verify `shanyan.enabled=true` and classpath |
+| `ClassNotFoundException` | Missing dependency | Add the required module |
+| Version conflict | `mvn dependency:tree` | Use BOM for version alignment |
+
+## 11. Contribution
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Run `mvn clean verify` before submitting.
+4. Submit a pull request.
+
+## 12. License
+
+This project is licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+---
+
+<div align="center">
+
+[Back to top](#readme-top) · [Issues](https://github.com/easy-4-java/shanyan-spring-boot-starter/issues) · [Repository](https://github.com/easy-4-java/shanyan-spring-boot-starter)
+
+</div>
