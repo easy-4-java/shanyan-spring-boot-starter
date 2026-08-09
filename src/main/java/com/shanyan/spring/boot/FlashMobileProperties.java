@@ -20,8 +20,12 @@ import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * 
+ * Top-level configuration properties for Shanyan (Flash Mobile) integration.
+ * <p>Binds to the {@code shanyan} prefix and holds a list of
+ * {@link FlashMobileApp} configurations for multiple applications.</p>
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @ConfigurationProperties(FlashMobileProperties.PREFIX)
 public class FlashMobileProperties {

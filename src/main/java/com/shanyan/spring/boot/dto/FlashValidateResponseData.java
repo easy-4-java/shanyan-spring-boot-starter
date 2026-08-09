@@ -20,22 +20,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
+/**
+ * Data payload for the Shanyan phone number validation response.
+ * <p>Contains the verification result and transaction ID.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FlashValidateResponseData{
 
 	/**
-	 * 值：1 是本机号码 0 非本机号码
+	 * Verification result: 1 if the phone number belongs to the current device, 0 otherwise.
 	 */
 	@JsonProperty("isVerify")
 	private int isVerify;
-	
+
 	/**
-	 * 闪验的交易流水号
+	 * Shanyan transaction ID.
 	 */
 	@JsonProperty("tradeNo")
 	private String tradeNo;
-	
+
+	/**
+	 * Returns whether the phone number belongs to the current device.
+	 *
+	 * @return {@code true} if verified, {@code false} otherwise
+	 */
 	public boolean isVerify() {
 		return 1 == isVerify;
 	}

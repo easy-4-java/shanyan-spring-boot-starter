@@ -10,7 +10,11 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
- * DES加解密util
+ * DES encryption and decryption utility.
+ * <p>Provides DES/CBC/PKCS5Padding encryption and decryption methods.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public class DES {
 	
@@ -21,6 +25,14 @@ public class DES {
 
 	private static byte[] iv = { 1, 2, 3, 4, 5, 6, 7, 8 };
 
+	/**
+	 * Encrypts a string using DES/CBC/PKCS5Padding.
+	 *
+	 * @param encryptString the string to encrypt
+	 * @param encryptKey the DES key
+	 * @return the Base64-encoded encrypted string
+	 * @throws Exception if encryption fails
+	 */
 	public static String encryptDES(String encryptString, String encryptKey)
 			throws Exception {
 		IvParameterSpec zeroIv = new IvParameterSpec(iv);
@@ -31,6 +43,14 @@ public class DES {
 		return Base64.encode(encryptedData);
 	}
 
+	/**
+	 * Decrypts a Base64-encoded DES-encrypted string.
+	 *
+	 * @param decryptString the Base64-encoded encrypted string
+	 * @param decryptKey the DES key
+	 * @return the decrypted string
+	 * @throws Exception if decryption fails
+	 */
 	public static String decryptDES(String decryptString, String decryptKey)
 			throws Exception {
 		byte[] byteMi = Base64.decode(decryptString);

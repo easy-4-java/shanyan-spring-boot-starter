@@ -6,9 +6,12 @@ import java.security.Key;
 import java.security.KeyFactory;
 import java.security.spec.PKCS8EncodedKeySpec;
 
-/*
- * RSA公钥/私钥/签名工具包
- * 非对称加密算法可以用来对对称加密的密钥加密，这样保证密钥的安全也就保证了数据的安全
+/**
+ * RSA public key / private key / signature utility.
+ * <p>Provides RSA decryption for phone numbers encrypted by the Shanyan SDK.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public class RSAUtils {
 
@@ -28,13 +31,13 @@ public class RSAUtils {
     private static final int MAX_DECRYPT_BLOCK = 128;
 
 
-    /*
-     * 私钥解密
+    /**
+     * Decrypts a hex-encoded RSA-encrypted string using the given private key.
      *
-     * @param encryptedStr 已加密数据
-     * @param privateKey   私钥(BASE64编码)
-     * @return
-     * @throws Exception
+     * @param encryptedStr the hex-encoded encrypted data
+     * @param privateKey the RSA private key (Base64-encoded)
+     * @return the decrypted string
+     * @throws Exception if decryption fails
      */
     public static String decryptByPrivateKeyForLongStr(String encryptedStr, String privateKey) throws Exception {
         byte[] encryptedData = ByteFormat.hexToBytes(encryptedStr);

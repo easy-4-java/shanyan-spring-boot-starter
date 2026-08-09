@@ -2,6 +2,13 @@ package com.shanyan.spring.boot.utils;
 
 import java.security.MessageDigest;
 
+/**
+ * MD5 hash utility.
+ * <p>Provides methods to compute MD5 hash digests for strings.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class MD5 {
 	// 全局数组
     private final static String[] strDigits = { "0", "1", "2", "3", "4", "5",
@@ -28,6 +35,12 @@ public class MD5 {
         return sBuffer.toString();
     }
 
+    /**
+     * Computes the MD5 hash of the given string.
+     *
+     * @param strObj the string to hash
+     * @return the MD5 hash as a lowercase hex string
+     */
     public static String getMD5Code(String strObj) {
         String resultString = null;
         try {

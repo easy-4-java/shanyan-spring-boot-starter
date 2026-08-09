@@ -17,10 +17,27 @@ import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 
 
+/**
+ * Auto-configuration for Shanyan (Flash Mobile) integration.
+ * <p>Registers a {@link FlashMobileTemplate} bean configured with the
+ * application properties, object mapper, and OkHttp3 client.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @Configuration
 @EnableConfigurationProperties({FlashMobileProperties.class, FlashMobileOkHttp3Properties.class})
 public class FlashMobileAutoConfiguration {
 	
+	/**
+	 * Creates a {@link FlashMobileTemplate} for Shanyan API operations.
+	 *
+	 * @param properties the Shanyan configuration properties
+	 * @param okHttp3Properties the OkHttp3 client configuration properties
+	 * @param objectMapperProvider provider for the Jackson object mapper
+	 * @param okhttp3ClientProvider provider for the OkHttp3 client
+	 * @return the configured Flash Mobile template
+	 */
 	@Bean
 	public FlashMobileTemplate shumeiAntiFraudTemplate(
 			FlashMobileProperties properties,  

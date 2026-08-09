@@ -21,9 +21,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/*
- * https://shanyan.253.com/document/details?lid=300&cid=93&pc=28&pn=%25E9%2597%25AA%25E9%25AA%258CSDK
+/**
+ * Template for Shanyan (Flash Mobile) API operations.
+ * <p>Provides methods for one-click login (phone number retrieval) and
+ * phone number verification using the Shanyan SDK backend API.</p>
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ * @see <a href="https://shanyan.253.com/document/details?lid=300&cid=93&pc=28">Shanyan SDK Documentation</a>
  */
 @Slf4j
 public class FlashMobileTemplate {
@@ -37,6 +42,13 @@ public class FlashMobileTemplate {
 	private OkHttpClient okhttp3Client;
 	private final FlashMobileProperties properties;
 
+	/**
+	 * Constructs a new template with the given properties, object mapper, and HTTP client.
+	 *
+	 * @param properties the Shanyan configuration properties
+	 * @param objectMapper the Jackson object mapper for JSON serialization
+	 * @param okhttp3Client the OkHttp3 client for HTTP requests
+	 */
 	public FlashMobileTemplate(FlashMobileProperties properties, ObjectMapper objectMapper,
 			OkHttpClient okhttp3Client) {
 		this.objectMapper = objectMapper;
@@ -44,28 +56,28 @@ public class FlashMobileTemplate {
 		this.properties = properties;
 	}
 
-	/*
-	 * 1、一键登录V2（获取手机号码）
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @param appId 应用对应的闪验APPID
-	 * @param clientIp 由客户服务端获取的前端APP的IP，如需要使用反欺诈核验功能则传入，否则可以不传。
-	 * @param token 从SDK获取的token参数；有效期：移动2分钟、电信10分钟、联通30分钟，一次有效。
-	 * @return
-	 * @throws Exception 
+	/**
+	 * Performs one-click login to retrieve the phone number.
+	 *
+	 * @param appId the Shanyan application ID
+	 * @param clientIp the client IP address (optional, used for anti-fraud verification)
+	 * @param token the token obtained from the SDK (valid for 2 min on China Mobile, 10 min on China Telecom, 30 min on China Unicom)
+	 * @return the login response containing the encrypted phone number
+	 * @throws Exception if the request fails or decryption fails
 	 */
 	public FlashLoginResponse login(String appId, String clientIp, String token) throws Exception {
 		return this.login(appId, null, clientIp, token);
 	}
 
-	/*
-	 * 1、一键登录V2（获取手机号码）
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @param appId 应用对应的闪验APPID
-	 * @param outId 客户方流水号, 可以为空
-	 * @param clientIp 由客户服务端获取的前端APP的IP，如需要使用反欺诈核验功能则传入，否则可以不传。
-	 * @param token 从SDK获取的token参数；有效期：移动2分钟、电信10分钟、联通30分钟，一次有效。
-	 * @return
-	 * @throws Exception 
+	/**
+	 * Performs one-click login to retrieve the phone number with an optional transaction ID.
+	 *
+	 * @param appId the Shanyan application ID
+	 * @param outId the client-side transaction ID (optional)
+	 * @param clientIp the client IP address (optional, used for anti-fraud verification)
+	 * @param token the token obtained from the SDK
+	 * @return the login response containing the decrypted phone number
+	 * @throws Exception if the request fails or decryption fails
 	 */
 	public FlashLoginResponse login(String appId, String outId, String clientIp, String token) throws Exception {
 		for (FlashMobileApp app : properties.getApps()) {
@@ -100,26 +112,26 @@ public class FlashMobileTemplate {
 		return new FlashLoginResponse();
 	}
 
-	/*
-	 * 2、本机认证V2（本机号码校验）
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @param appId 应用对应的闪验APPID
-	 * @param mobile 待校验的手机号码
-	 * @param token 从SDK获取的token参数；有效期：移动2分钟、电信10分钟、联通30分钟，一次有效。
-	 * @return
+	/**
+	 * Verifies if the given phone number belongs to the current device.
+	 *
+	 * @param appId the Shanyan application ID
+	 * @param mobile the phone number to verify
+	 * @param token the token obtained from the SDK
+	 * @return the validation response
 	 */
 	public FlashValidateResponse validate(String appId, String mobile, String token) {
 		return this.validate(null, mobile, token);
 	}
 	
-	/*
-	 * 2、本机认证V2（本机号码校验）
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @param appId 应用对应的闪验APPID
-	 * @param outId 客户方流水号, 可以为空
-	 * @param mobile 待校验的手机号码
-	 * @param token 从SDK获取的token参数；有效期：移动2分钟、电信10分钟、联通30分钟，一次有效。
-	 * @return
+	/**
+	 * Verifies if the given phone number belongs to the current device with an optional transaction ID.
+	 *
+	 * @param appId the Shanyan application ID
+	 * @param outId the client-side transaction ID (optional)
+	 * @param mobile the phone number to verify
+	 * @param token the token obtained from the SDK
+	 * @return the validation response
 	 */
 	public FlashValidateResponse validate(String appId, String outId, String mobile, String token) {
 
@@ -144,10 +156,27 @@ public class FlashMobileTemplate {
 	}
 	
 	
+	/**
+	 * Sends a request and deserializes the response to the given class.
+	 *
+	 * @param url the request URL
+	 * @param params the request parameters
+	 * @param cls the target class for deserialization
+	 * @param <T> the response type
+	 * @return the deserialized response, or {@code null} if the request fails
+	 */
 	public <T> T request(String url, Map<String, String> params, Class<T> cls) {
 		return toBean(requestInvoke(url, params), cls);
 	}
 
+	/**
+	 * Deserializes a JSON string to the given class.
+	 *
+	 * @param json the JSON string
+	 * @param cls the target class
+	 * @param <T> the target type
+	 * @return the deserialized object, or {@code null} if deserialization fails
+	 */
 	public <T> T toBean(String json, Class<T> cls) {
 		try {
 			return objectMapper.readValue(json, cls);
@@ -157,12 +186,12 @@ public class FlashMobileTemplate {
 		return null;
 	}
 
-	/*
-	 * http 请求service
+	/**
+	 * Executes an HTTP POST request with form-encoded parameters.
 	 *
-	 * @param url
-	 * @param params
-	 * @return
+	 * @param url the request URL
+	 * @param params the form parameters
+	 * @return the response body as a string, or {@code null} if the request fails
 	 */
 	public String requestInvoke(String url, Map<String, String> params) {
 		String content = null;
@@ -186,14 +215,29 @@ public class FlashMobileTemplate {
 		return content;
 	}
 
+	/**
+	 * Returns the Jackson object mapper.
+	 *
+	 * @return the object mapper
+	 */
 	public ObjectMapper getObjectMapper() {
 		return objectMapper;
 	}
 
+	/**
+	 * Returns the Shanyan configuration properties.
+	 *
+	 * @return the properties
+	 */
 	public FlashMobileProperties getProperties() {
 		return properties;
 	}
 
+	/**
+	 * Returns the OkHttp3 client.
+	 *
+	 * @return the OkHttp3 client
+	 */
 	public OkHttpClient getOkhttp3Client() {
 		return okhttp3Client;
 	}

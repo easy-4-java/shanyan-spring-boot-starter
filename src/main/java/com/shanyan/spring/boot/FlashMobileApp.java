@@ -17,23 +17,32 @@ package com.shanyan.spring.boot;
 
 import lombok.Data;
 
+/**
+ * Configuration for a single Shanyan (Flash Mobile) application.
+ * <p>Contains the app ID, app key, encryption type, and private key
+ * required for one-click login and phone number verification.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @Data
 public class FlashMobileApp {
 	
 	/**
-	 * 应用对应的闪验APPID；由控制台创建应用时生成
+	 * Shanyan application ID, generated when creating the application in the console.
 	 */
 	private String appId;
 	/**
-	 * 应用对应的闪验APPKEY
+	 * Shanyan application key.
 	 */
 	private String appKey;
 	/**
-	 * 手机号加解密方式，值包含：0（AES加密）、1（RSA加密）缺省为0，如使用RSA方式则在创建应用时必须填写RSA公钥。
+	 * Phone number encryption type: 0 for AES, 1 for RSA. Defaults to 0.
+	 * When using RSA, the RSA public key must be provided when creating the application.
 	 */
 	private String encryptType = "0";
 	/**
-	 * 手机号解密私钥，encryptType 为 1（RSA加密）时，必须填写 RSA私钥
+	 * RSA private key for phone number decryption. Required when encryptType is 1 (RSA).
 	 */
 	private String privateKey = "";
 	

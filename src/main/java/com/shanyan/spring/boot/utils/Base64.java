@@ -1,5 +1,13 @@
 package com.shanyan.spring.boot.utils;
 
+/**
+ * Base64 encoding and decoding utility.
+ * <p>Provides methods to encode byte arrays to Base64 strings and
+ * decode Base64 strings back to byte arrays.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public final class Base64 {
 	/**
 	 * Base64编码表。

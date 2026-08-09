@@ -7,7 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * 闪验登录响应结果
+ * Response model for Shanyan one-click login.
+ * <p>Contains the response code, message, charge status, and login data
+ * including the encrypted phone number.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,29 +20,34 @@ import lombok.Data;
 public class FlashLoginResponse {
 
 	/**
-	 * 响应代码;200000表示成功，其他代码都为失败，详情参考附录。
+	 * Response code. 200000 indicates success; other codes indicate failure.
 	 */
 	@JsonProperty("code")
 	private String code;
 
 	/**
-	 * 响应代码描述
+	 * Response code description.
 	 */
 	@JsonProperty("message")
 	private String message;
-	
+
 	/**
-	 * 计费标识，是否收费，枚举值：1:收费/0:不收费
+	 * Charge status indicator: 1 for charged, 0 for not charged.
 	 */
 	@JsonProperty("chargeStatus")
 	private int chargeStatus;
 
 	/**
-	 * 数据内容
+	 * Response data containing the encrypted phone number.
 	 */
 	@JsonProperty("data")
 	private FlashLoginResponseData data;
-	
+
+	/**
+	 * Returns whether the login request was successful.
+	 *
+	 * @return {@code true} if the response code is 200000, {@code false} otherwise
+	 */
 	public boolean isSuccess() {
 		return "200000".equals(code);
 	}

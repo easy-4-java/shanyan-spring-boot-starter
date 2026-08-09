@@ -21,22 +21,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
+/**
+ * Data payload for the Shanyan login response.
+ * <p>Contains the encrypted phone number, decrypted phone number, and transaction ID.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FlashLoginResponseData{
 
 	/**
-	 * 手机号密文 ，根据传入的encryptType值选择对应算法解密手机号。
+	 * Encrypted phone number. Decrypt using the algorithm specified by encryptType.
 	 */
 	@JsonProperty("mobileName")
 	private String mobileName;
 	/**
-	 * 手机号明文
+	 * Decrypted phone number in plaintext.
 	 */
 	@JsonIgnore
 	private String mobile;
 	/**
-	 * 闪验的交易流水号
+	 * Shanyan transaction ID.
 	 */
 	@JsonProperty("tradeNo")
 	private String tradeNo;

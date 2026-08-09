@@ -5,16 +5,27 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 
-/*
- * Description: AES加密解密方法
+/**
+ * AES encryption and decryption utility.
+ * <p>Provides AES/CBC/PKCS5Padding decryption for phone numbers
+ * encrypted by the Shanyan SDK.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public class AESUtils {
 
     private static final String charset = "UTF-8";
 
 
-    /*
-     * Description: AES解密
+    /**
+     * Decrypts an AES-encrypted hex string.
+     *
+     * @param sSrc the hex-encoded encrypted data
+     * @param sKey the 16-character AES key
+     * @param siv the initialization vector
+     * @return the decrypted string
+     * @throws Exception if decryption fails
      */
     public static String decrypt(String sSrc, String sKey, String siv) throws Exception {
         try {

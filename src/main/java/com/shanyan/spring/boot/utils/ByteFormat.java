@@ -1,7 +1,11 @@
 package com.shanyan.spring.boot.utils;
 
 /**
- * 格式化操作类
+ * Byte array and hex string conversion utility.
+ * <p>Provides methods to convert between byte arrays and hexadecimal string representations.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public class ByteFormat {
     private static final char[] HEX = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
@@ -9,6 +13,12 @@ public class ByteFormat {
     public ByteFormat() {
     }
 
+    /**
+     * Converts a byte array to a hexadecimal string.
+     *
+     * @param bArray the byte array to convert
+     * @return the hexadecimal string representation
+     */
     public static final String bytesToHexString(byte[] bArray) {
         StringBuffer sb = new StringBuffer(bArray.length);
 
@@ -24,6 +34,12 @@ public class ByteFormat {
         return sb.toString();
     }
 
+    /**
+     * Converts a hexadecimal string to a byte array.
+     *
+     * @param str the hexadecimal string to convert
+     * @return the byte array, or {@code null} if the input is {@code null}
+     */
     public static byte[] hexToBytes(String str) {
         if (str == null) {
             return null;
