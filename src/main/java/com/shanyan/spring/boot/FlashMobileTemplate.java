@@ -121,7 +121,7 @@ public class FlashMobileTemplate {
 	 * @return the validation response
 	 */
 	public FlashValidateResponse validate(String appId, String mobile, String token) {
-		return this.validate(null, mobile, token);
+		return this.validate(appId, null, mobile, token);
 	}
 	
 	/**
