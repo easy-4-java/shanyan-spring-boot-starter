@@ -21,7 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @ConfigurationProperties(FlashMobileProperties.PREFIX)
 public class FlashMobileProperties {
