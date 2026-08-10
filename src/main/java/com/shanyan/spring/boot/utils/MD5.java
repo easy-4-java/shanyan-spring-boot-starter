@@ -6,7 +6,7 @@ import java.security.MessageDigest;
  * MD5 hash utility.
  * <p>Provides methods to compute MD5 hash digests for strings.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class MD5 {

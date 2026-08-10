@@ -22,7 +22,7 @@ import lombok.Data;
  * <p>Contains the app ID, app key, encryption type, and private key
  * required for one-click login and phone number verification.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @Data

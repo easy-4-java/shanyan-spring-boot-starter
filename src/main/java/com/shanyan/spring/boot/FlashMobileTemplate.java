@@ -26,7 +26,7 @@ import okhttp3.Response;
  * <p>Provides methods for one-click login (phone number retrieval) and
  * phone number verification using the Shanyan SDK backend API.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  * @see <a href="https://shanyan.253.com/document/details?lid=300&cid=93&pc=28">Shanyan SDK Documentation</a>
  */

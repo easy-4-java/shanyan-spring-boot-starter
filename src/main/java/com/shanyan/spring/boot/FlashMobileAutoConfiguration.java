@@ -22,7 +22,7 @@ import okhttp3.OkHttpClient;
  * <p>Registers a {@link FlashMobileTemplate} bean configured with the
  * application properties, object mapper, and OkHttp3 client.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @Configuration

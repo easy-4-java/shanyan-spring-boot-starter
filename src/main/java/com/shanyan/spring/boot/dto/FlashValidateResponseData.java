@@ -24,7 +24,7 @@ import lombok.Data;
  * Data payload for the Shanyan phone number validation response.
  * <p>Contains the verification result and transaction ID.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @Data

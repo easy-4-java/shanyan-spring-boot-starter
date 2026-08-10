@@ -4,7 +4,7 @@ package com.shanyan.spring.boot.utils;
  * Byte array and hex string conversion utility.
  * <p>Provides methods to convert between byte arrays and hexadecimal string representations.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class ByteFormat {

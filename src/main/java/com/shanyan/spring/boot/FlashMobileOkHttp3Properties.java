@@ -17,7 +17,7 @@ import okio.Source;
  * <p>Binds to the {@code shanyan.okhttp3} prefix and provides settings for
  * timeouts, connection pooling, redirects, and retry behavior.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @ConfigurationProperties(FlashMobileOkHttp3Properties.PREFIX)

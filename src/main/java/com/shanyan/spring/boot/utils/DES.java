@@ -13,7 +13,7 @@ import java.security.SecureRandom;
  * DES encryption and decryption utility.
  * <p>Provides DES/CBC/PKCS5Padding encryption and decryption methods.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class DES {

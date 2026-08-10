@@ -5,7 +5,7 @@ package com.shanyan.spring.boot.utils;
  * <p>Provides methods to encode byte arrays to Base64 strings and
  * decode Base64 strings back to byte arrays.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public final class Base64 {

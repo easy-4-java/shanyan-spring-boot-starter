@@ -10,7 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
  * <p>Provides AES/CBC/PKCS5Padding decryption for phone numbers
  * encrypted by the Shanyan SDK.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class AESUtils {

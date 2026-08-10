@@ -10,7 +10,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
  * RSA public key / private key / signature utility.
  * <p>Provides RSA decryption for phone numbers encrypted by the Shanyan SDK.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class RSAUtils {
